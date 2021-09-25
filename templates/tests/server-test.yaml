@@ -14,7 +14,7 @@ spec:
       imagePullPolicy: {{ .Values.server.image.pullPolicy }}
       env:
         - name: VAULT_ADDR
-          value: {{ include "vault.scheme" . }}://{{ template "vault.fullname" . }}.{{ .Release.Namespace }}.svc:{{ .Values.server.service.port }}
+          value: {{ include "vault.scheme" . }}://{{ template "vault.serviceName" . }}.{{ .Release.Namespace }}.svc:{{ .Values.server.service.port }}
       command:
         - /bin/sh
         - -c

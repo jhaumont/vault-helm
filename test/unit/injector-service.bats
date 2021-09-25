@@ -64,3 +64,14 @@ load _helpers
       yq -r '.metadata.annotations["vaultIsAwesome"]' | tee /dev/stderr)
   [ "${actual}" = "true" ]
 }
+
+@test "injector/Service: override default service name" {
+  cd `chart_dir`
+
+  local actual=$(helm template \
+      --show-only templates/server-service.yaml \
+      --set 'global.serviceNameOverride=vault' \
+      . | tee /dev/stderr |
+      yq -r '.metadata.name' | tee /dev/stderr)
+  [ "${actual}" = "vault" ]
+}

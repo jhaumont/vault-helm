@@ -23,6 +23,10 @@ global:
       apparmor.security.beta.kubernetes.io/allowedProfileNames: runtime/default
       seccomp.security.alpha.kubernetes.io/defaultProfileName:  runtime/default
       apparmor.security.beta.kubernetes.io/defaultProfileName:  runtime/default
+  
+  # Override services name
+  # serviceNameOverride: 
+
 
 injector:
   # True if you want to enable vault agent injection.

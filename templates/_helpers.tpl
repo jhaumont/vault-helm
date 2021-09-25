@@ -32,6 +32,21 @@ Expand the name of the chart.
 {{- end -}}
 
 {{/*
+Create a default fully qualified app name.
+We truncate at 63 chars because some Kubernetes name fields are limited to
+this (by the DNS naming spec). If release name contains chart name it will
+be used as a full name.
+*/}}
+{{- define "vault.serviceName" -}}
+{{- if .Values.global.serviceNameOverride -}}
+{{- .Values.global.serviceNameOverride | trunc 63 | trimSuffix "-" -}}
+{{- else -}}
+{{ (include "vault.fullname" .) }}
+{{- end -}}
+{{- end -}}
+
+
+{{/*
 Compute the maximum number of unavailable replicas for the PodDisruptionBudget.
 This defaults to (n/2)-1 where n is the number of members of the server cluster.
 Add a special case for replicas=1, where it should default to 0 as well.

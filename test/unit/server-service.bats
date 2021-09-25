@@ -384,3 +384,15 @@ load _helpers
       yq -r '.spec.ports | map(select(.port==8200)) | .[] .name' | tee /dev/stderr)
   [ "${actual}" = "https" ]
 }
+
+@test "server/Service: override default service name" {
+  cd `chart_dir`
+
+  local actual=$(helm template \
+      --show-only templates/server-service.yaml \
+      --set 'server.service.enabled=true' \
+      --set 'global.serviceNameOverride=vault' \
+      . | tee /dev/stderr |
+      yq -r '.metadata.name' | tee /dev/stderr)
+  [ "${actual}" = "vault" ]
+}

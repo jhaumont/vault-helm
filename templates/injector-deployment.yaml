@@ -75,7 +75,7 @@ spec:
             - name: AGENT_INJECT_TLS_AUTO
               value: {{ template "vault.fullname" . }}-agent-injector-cfg
             - name: AGENT_INJECT_TLS_AUTO_HOSTS
-              value: {{ template "vault.fullname" . }}-agent-injector-svc,{{ template "vault.fullname" . }}-agent-injector-svc.{{ .Release.Namespace }},{{ template "vault.fullname" . }}-agent-injector-svc.{{ .Release.Namespace }}.svc
+              value: {{ template "vault.serviceName" . }}-agent-injector-svc,{{ template "vault.serviceName" . }}-agent-injector-svc.{{ .Release.Namespace }},{{ template "vault.serviceName" . }}-agent-injector-svc.{{ .Release.Namespace }}.svc
             {{- end }}
             - name: AGENT_INJECT_LOG_FORMAT
               value: {{ .Values.injector.logFormat | default "standard" }}
